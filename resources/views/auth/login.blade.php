@@ -59,7 +59,9 @@
                                     </a>
                                 @endif
                                 <br>
-                                <a href="{{ route('register') }}" class="btn btn-link">Sign Up</a>
+                                @if (count(\App\User::all()) < 1)
+                                    <a href="{{ route('register') }}" class="btn btn-link">Sign Up</a>
+                                @endif
                             </div>
                         </div>
 

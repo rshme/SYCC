@@ -20,5 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResources([
     'game' => 'API\GameController',
     'socmed' => 'API\SocmedController',
-    'account' => 'API\AccountController'
+    'account' => 'API\AccountController',
+    'accountsm' => 'API\AccountSocmedController',
+    'trash' => 'API\TrashController'
 ]);

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Socmed;
 
 class SocmedSeeder extends Seeder
 {
@@ -11,6 +12,17 @@ class SocmedSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $socmeds = [
+            'Facebook',
+            'Instagram',
+            'Twitter',
+            'Github',
+        ];
+
+        foreach ($socmeds as $socmed) {
+            Socmed::create([
+                'name' => $socmed
+            ]);
+        }
     }
 }

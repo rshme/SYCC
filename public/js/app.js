@@ -1738,6 +1738,135 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trash.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    var _this = this;
+
+    this.allTrash();
+    Fire.$on("refresh", function () {
+      _this.allTrash();
+    });
+  },
+  data: function data() {
+    return {
+      alltrash: []
+    };
+  },
+  methods: {
+    allTrash: function allTrash() {
+      var _this2 = this;
+
+      axios.get("/api/trash").then(function (res) {
+        _this2.alltrash = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    restoreTrash: function restoreTrash(id) {
+      axios.put("/api/trash/".concat(id)).then(function (res) {
+        if (res.status === 200) {
+          swal.fire({
+            type: "success",
+            text: "Akun telah kembalikan",
+            showConfirmButton: false,
+            timer: 3000
+          });
+          Fire.$emit("refresh");
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteTrash: function deleteTrash(id) {
+      swal.fire({
+        title: "Are you sure?",
+        text: "Yakin untuk menghapus permanen akun ini?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batal"
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]("/api/trash/".concat(id)).then(function () {
+            swal.fire({
+              type: "success",
+              title: "Deleted !",
+              text: "Akun Telah Dihapus !",
+              showConfirmButton: false,
+              timer: 3000
+            });
+            Fire.$emit("refresh");
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Game.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Game.vue?vue&type=script&lang=js& ***!
@@ -1747,6 +1876,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2011,8 +2149,8 @@ __webpack_require__.r(__webpack_exports__);
         text: "Yakin untuk menghapus akun ini?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonColor: "#d33",
         confirmButtonText: "Ya, Hapus!",
         cancelButtonText: "Batal"
       }).then(function (result) {
@@ -2060,9 +2198,276 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("Component mounted.");
+    var _this = this;
+
+    this.allSocmed();
+    Fire.$on("refresh", function () {
+      _this.allSocmed();
+    });
+  },
+  data: function data() {
+    return {
+      accounts: [],
+      options: [],
+      form: new Form({
+        id: "",
+        socmed_id: "",
+        username: "",
+        email: "",
+        description: "",
+        password: ""
+      }),
+      edit: false
+    };
+  },
+  methods: {
+    allSocmed: function allSocmed() {
+      var _this2 = this;
+
+      axios.get("/api/accountsm").then(function (res) {
+        _this2.accounts = res.data;
+        _this2.options = res.data; // console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    createAccount: function createAccount() {
+      this.edit = false;
+      this.form.reset();
+      $("#modal-accountTitle").text("Tambah Account");
+      $("#modal-account").modal("show");
+    },
+    editAccount: function editAccount(account) {
+      this.edit = true;
+      this.form.reset();
+      $("#modal-account").modal("show");
+      this.form.fill(account);
+    },
+    storeAccount: function storeAccount() {
+      this.form.post("/api/accountsm").then(function (res) {
+        if (res.status === 201) {
+          $("#modal-account").modal("hide");
+          swal.fire({
+            type: "success",
+            text: "Berhasil Menambahkan Akun !",
+            showConfirmButton: false,
+            timer: 3000
+          });
+          Fire.$emit("refresh");
+        }
+      })["catch"](function (err) {
+        swal.fire("Oops!", "Something went wrong", "error");
+      });
+    },
+    updateAccount: function updateAccount() {
+      var _this3 = this;
+
+      this.form.put("/api/accountsm/" + this.form.id).then(function (res) {
+        if (res.status === 200) {
+          $("#modal-account").modal("hide");
+          swal.fire({
+            type: "success",
+            text: "Akun berhasil di edit !",
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          _this3.form.reset();
+
+          Fire.$emit("refresh");
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteAccount: function deleteAccount(id) {
+      swal.fire({
+        title: "Are you sure?",
+        text: "Yakin untuk menghapus akun ini?",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonColor: "#3085d6",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batal"
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]("/api/accountsm/".concat(id)).then(function () {
+            swal.fire({
+              type: "success",
+              title: "Deleted !",
+              text: "Akun Telah Dihapus !",
+              showConfirmButton: false,
+              timer: 3000
+            });
+            Fire.$emit("refresh");
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        }
+      });
+    }
   }
 });
 
@@ -2246,8 +2651,8 @@ __webpack_require__.r(__webpack_exports__);
         text: "Yakin akan menghapus Game ini?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonColor: "#d33",
         confirmButtonText: "Ya, Hapus!",
         cancelButtonText: "Batal"
       }).then(function (result) {
@@ -2295,9 +2700,182 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("Component mounted.");
+    var _this = this;
+
+    this.allSocmed();
+    Fire.$on("refresh", function () {
+      _this.allSocmed();
+    });
+  },
+  data: function data() {
+    return {
+      socmeds: [],
+      form: new Form({
+        id: "",
+        name: ""
+      }),
+      edit: false
+    };
+  },
+  methods: {
+    allSocmed: function allSocmed() {
+      var _this2 = this;
+
+      axios.get("/api/socmed").then(function (res) {
+        _this2.socmeds = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    createSocmed: function createSocmed() {
+      this.edit = false;
+      this.form.reset();
+      $("#modalSocmedTitle").text("Tambah Sosial Media");
+      $("#modalSocmed").modal("show");
+    },
+    editSocmed: function editSocmed(socmed) {
+      this.edit = true;
+      this.form.reset();
+      $("#modalSocmed").modal("show");
+      this.form.fill(socmed);
+    },
+    storeSocmed: function storeSocmed() {
+      this.form.post("/api/socmed").then(function (res) {
+        if (res.status === 201) {
+          $("#modalSocmed").modal("hide");
+          swal.fire({
+            type: "success",
+            text: "Berhasil Menambahkan Sosial Media",
+            showConfirmButton: false,
+            timer: 3000
+          });
+          Fire.$emit("refresh");
+        }
+      })["catch"](function (err) {
+        swal.fire("Oops!", "Something went wrong", "error");
+      });
+    },
+    updateSocmed: function updateSocmed() {
+      var _this3 = this;
+
+      this.form.put("/api/socmed/" + this.form.id).then(function (res) {
+        if (res.status === 200) {
+          $("#modalSocmed").modal("hide");
+          swal.fire({
+            type: "success",
+            text: "Sosial media berhasil di edit !",
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          _this3.form.reset();
+
+          Fire.$emit("refresh");
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteSocmed: function deleteSocmed(id) {
+      swal.fire({
+        title: "Are you sure?",
+        text: "Yakin akan menghapus sosial media ini?",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonColor: "#3085d6",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batal"
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]("/api/socmed/".concat(id)).then(function () {
+            swal.fire({
+              type: "success",
+              title: "Deleted !",
+              text: "Sosial media Telah Dihapus !",
+              showConfirmButton: false,
+              timer: 3000
+            });
+            Fire.$emit("refresh");
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        }
+      });
+    }
   }
 });
 
@@ -6748,6 +7326,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.new[data-v-18fa0fdd] {\n  padding-top: 20px;\n}\n.new button[data-v-18fa0fdd] {\n  float: right;\n  margin-bottom: 24px;\n  margin-left: 12px;\n}\n.name h2[data-v-18fa0fdd] {\n  font-size: 24px;\n  margin-bottom: 12px;\n}\n.account .card-footer button[data-v-18fa0fdd] {\n  float: right;\n  margin-left: 12px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Game.vue?vue&type=style&index=0&id=c920df02&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Game.vue?vue&type=style&index=0&id=c920df02&scoped=true&lang=css& ***!
@@ -6767,6 +7364,25 @@ exports.push([module.i, "\n.new[data-v-c920df02] {\n  padding-top: 20px;\n}\n.ne
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.new[data-v-021fd0b2] {\n  padding-top: 20px;\n}\n.new button[data-v-021fd0b2] {\n  float: right;\n  margin-bottom: 24px;\n  margin-left: 12px;\n}\n.name h2[data-v-021fd0b2] {\n  font-size: 24px;\n  margin-bottom: 12px;\n}\n.account .card-footer button[data-v-021fd0b2] {\n  float: right;\n  margin-left: 12px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Game.vue?vue&type=style&index=0&id=ffe0a0fe&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/manage/Game.vue?vue&type=style&index=0&id=ffe0a0fe&scoped=true&lang=css& ***!
@@ -6780,6 +7396,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\nh1.name-game[data-v-ffe0a0fe] {\n  font-size: 24px;\n}\n.card-footer button[data-v-ffe0a0fe] {\n  float: right;\n  margin-left: 12px;\n}\n.new button[data-v-ffe0a0fe] {\n  float: right;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nh1.name-socmed[data-v-3f343734] {\n  font-size: 24px;\n}\n.card-footer button[data-v-3f343734] {\n  float: right;\n  margin-left: 12px;\n}\n.new button[data-v-3f343734] {\n  float: right;\n}\n", ""]);
 
 // exports
 
@@ -37627,6 +38262,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Game.vue?vue&type=style&index=0&id=c920df02&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Game.vue?vue&type=style&index=0&id=c920df02&scoped=true&lang=css& ***!
@@ -37657,6 +38322,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Game.vue?vue&type=style&index=0&id=ffe0a0fe&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/manage/Game.vue?vue&type=style&index=0&id=ffe0a0fe&scoped=true&lang=css& ***!
@@ -37666,6 +38361,36 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Game.vue?vue&type=style&index=0&id=ffe0a0fe&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Game.vue?vue&type=style&index=0&id=ffe0a0fe&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -42143,6 +42868,95 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=template&id=18fa0fdd&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Trash.vue?vue&type=template&id=18fa0fdd&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.alltrash, function(trash) {
+        return _c("div", { key: trash.id, staticClass: "col-md-4 mt-3" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              trash.game_id === null
+                ? _c("p", [_vm._v("Account: " + _vm._s(trash.socmed.name))])
+                : _c("p", [_vm._v("Account: " + _vm._s(trash.game.name))]),
+              _vm._v(" "),
+              trash.username != null
+                ? _c("p", [_vm._v("Username: " + _vm._s(trash.username))])
+                : _vm._e(),
+              _vm._v(" "),
+              trash.email != null
+                ? _c("p", [_vm._v("Email: " + _vm._s(trash.email))])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", [_vm._v("Password: " + _vm._s(trash.password))]),
+              _vm._v(" "),
+              trash.description != null
+                ? _c("p", [_vm._v("Password: " + _vm._s(trash.description))])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteTrash(trash.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-trash" }),
+                  _vm._v(" Hapus\n          ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: {
+                    click: function($event) {
+                      return _vm.restoreTrash(trash.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-sync-alt" }),
+                  _vm._v(" Restore\n          ")
+                ]
+              )
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Game.vue?vue&type=template&id=c920df02&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Game.vue?vue&type=template&id=c920df02&scoped=true& ***!
@@ -42203,13 +43017,23 @@ var render = function() {
                         _c("div", { staticClass: "card-body" }, [
                           account.username != null
                             ? _c("p", [
-                                _vm._v("Username: " + _vm._s(account.username))
+                                _c("b", [_vm._v("Username:")]),
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(account.username) +
+                                    "\n            "
+                                )
                               ])
                             : _vm._e(),
                           _vm._v(" "),
                           account.email != null
                             ? _c("p", [
-                                _vm._v("Email: " + _vm._s(account.email))
+                                _c("b", [_vm._v("Email:")]),
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(account.email) +
+                                    "\n            "
+                                )
                               ])
                             : _vm._e(),
                           _vm._v(" "),
@@ -42219,8 +43043,11 @@ var render = function() {
                           _vm._v(" "),
                           account.description != null
                             ? _c("p", [
+                                _c("b", [_vm._v("Deskripsi:")]),
                                 _vm._v(
-                                  "Deskripsi: " + _vm._s(account.description)
+                                  "\n              " +
+                                    _vm._s(account.description) +
+                                    "\n            "
                                 )
                               ])
                             : _vm._e()
@@ -42676,10 +43503,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -42691,27 +43518,518 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "row new" }, [
+        _c("div", { staticClass: "col-12 col-new" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: {
+                click: function($event) {
+                  return _vm.createAccount()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fas fa-plus" }),
+              _vm._v(" Add Account\n      ")
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.accounts, function(socmed) {
+        return _c("div", { key: socmed.id }, [
+          _c("div", { staticClass: "row name" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("h2", [_vm._v(_vm._s(socmed.name))])
+            ])
+          ]),
+          _vm._v(" "),
+          socmed.account.length > 0
+            ? _c(
+                "div",
+                { staticClass: "row account" },
+                _vm._l(socmed.account, function(account) {
+                  return _c(
+                    "div",
+                    { key: account.id, staticClass: "col-md-4 mb-3" },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "card-body" }, [
+                          account.username != null
+                            ? _c("p", [
+                                _vm._v("Username: " + _vm._s(account.username))
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          account.email != null
+                            ? _c("p", [
+                                _vm._v("Email: " + _vm._s(account.email))
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v("Password: " + _vm._s(account.password))
+                          ]),
+                          _vm._v(" "),
+                          account.description != null
+                            ? _c("p", [
+                                _vm._v(
+                                  "Deskripsi: " + _vm._s(account.description)
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteAccount(account.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-trash" }),
+                              _vm._v(" Hapus\n            ")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              on: {
+                                click: function($event) {
+                                  return _vm.editAccount(account)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-pen" }),
+                              _vm._v(" Edit\n            ")
+                            ]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            : _c("div", [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12 mb-3" }, [
+                    _c("div", { staticClass: "alert alert-danger" }, [
+                      _c("p", [
+                        _vm._v(
+                          "Belum ada akun untuk sosial media " +
+                            _vm._s(socmed.name)
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "modal-account",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modal-accountTitle",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "modal-accountTitle" }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.edit ? "Edit Account" : "Create Account")
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "form",
+                    {
+                      staticClass: "form-horizontal",
+                      attrs: { id: "form-account" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          _vm.edit ? _vm.updateAccount() : _vm.storeAccount()
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "input-group mb-3" },
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.socmed_id,
+                                  expression: "form.socmed_id"
+                                }
+                              ],
+                              staticClass: "custom-select",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("socmed_id")
+                              },
+                              attrs: { id: "socmed_id", name: "socmed_id" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "socmed_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.options, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [_vm._v(_vm._s(option.name))]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "socmed_id" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "username" } }, [
+                            _vm._v("Username")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.username,
+                                expression: "form.username"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("username")
+                            },
+                            attrs: {
+                              type: "text",
+                              id: "username",
+                              name: "username",
+                              placeholder: "Kosongkan bila tidak ada"
+                            },
+                            domProps: { value: _vm.form.username },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "username",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "username" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "email" } }, [
+                            _vm._v("Email")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.email,
+                                expression: "form.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("email")
+                            },
+                            attrs: {
+                              type: "email",
+                              id: "email",
+                              name: "email",
+                              placeholder: "Kosongkan bila tidak ada"
+                            },
+                            domProps: { value: _vm.form.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "email", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "email" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "password" } }, [
+                            _vm._v("Password")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password,
+                                expression: "form.password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("password")
+                            },
+                            attrs: {
+                              type: "password",
+                              id: "password",
+                              name: "password"
+                            },
+                            domProps: { value: _vm.form.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "password",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "password" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "description" } }, [
+                            _vm._v("Keterangan")
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.description,
+                                expression: "form.description"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("description")
+                            },
+                            attrs: {
+                              name: "description",
+                              id: "description",
+                              placeholder:
+                                "Tambahkan keterangan tentang akun, biarkan kosong jika tidak ada"
+                            },
+                            domProps: { value: _vm.form.description },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "description",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "description" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "submit", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.edit,
+                              expression: "!edit"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Create")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.edit,
+                              expression: "edit"
+                            }
+                          ],
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Edit")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("I'm an socmed component.")
-            ])
-          ])
-        ])
-      ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "label",
+        { staticClass: "input-group-text", attrs: { for: "socmed_id" } },
+        [_vm._v("socmed")]
+      )
     ])
   }
 ]
@@ -42973,10 +44291,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -42988,27 +44306,237 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row new" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mt-3 mb-3",
+            on: {
+              click: function($event) {
+                return _vm.createSocmed()
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "fas fa-plus" }),
+            _vm._v(" Tambah Sosial Media\n      ")
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _vm._l(_vm.socmeds, function(socmed) {
+          return _c("div", { key: socmed.id, staticClass: "col-md-4 mb-2" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body text-center" }, [
+                _c("h1", { staticClass: "name-socmed" }, [
+                  _vm._v(_vm._s(socmed.name))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.editSocmed(socmed)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-pen" }),
+                      _vm._v(" Edit\n            ")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteSocmed(socmed.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-trash" }),
+                      _vm._v(" Hapus\n            ")
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "modalSocmed",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "modalSocmedTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "form",
+                      {
+                        staticClass: "form-horizontal",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.edit ? _vm.updateSocmed() : _vm.storeSocmed()
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "name" } }, [
+                              _vm._v("Nama Sosial Media")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.name,
+                                  expression: "form.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("name")
+                              },
+                              attrs: { type: "text", id: "name", name: "name" },
+                              domProps: { value: _vm.form.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "name" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: { type: "button", "data-dismiss": "modal" }
+                          },
+                          [_vm._v("Close")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.edit,
+                                expression: "!edit"
+                              }
+                            ],
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Create")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.edit,
+                                expression: "edit"
+                              }
+                            ],
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Manage Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("I'm an socmed component.")
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", {
+        staticClass: "modal-title",
+        attrs: { id: "modalSocmedTitle" }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
@@ -57900,6 +59428,9 @@ var routes = [{
 }, {
   path: '/manage/socmed',
   component: __webpack_require__(/*! ./components/manage/Socmed.vue */ "./resources/js/components/manage/Socmed.vue")["default"]
+}, {
+  path: '/trash',
+  component: __webpack_require__(/*! ./components/Trash.vue */ "./resources/js/components/Trash.vue")["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes,
@@ -58048,6 +59579,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Trash.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Trash.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Trash_vue_vue_type_template_id_18fa0fdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Trash.vue?vue&type=template&id=18fa0fdd&scoped=true& */ "./resources/js/components/Trash.vue?vue&type=template&id=18fa0fdd&scoped=true&");
+/* harmony import */ var _Trash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Trash.vue?vue&type=script&lang=js& */ "./resources/js/components/Trash.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css& */ "./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Trash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Trash_vue_vue_type_template_id_18fa0fdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Trash_vue_vue_type_template_id_18fa0fdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "18fa0fdd",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Trash.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Trash.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Trash.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Trash.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css& ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=style&index=0&id=18fa0fdd&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_style_index_0_id_18fa0fdd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Trash.vue?vue&type=template&id=18fa0fdd&scoped=true&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Trash.vue?vue&type=template&id=18fa0fdd&scoped=true& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_template_id_18fa0fdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Trash.vue?vue&type=template&id=18fa0fdd&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Trash.vue?vue&type=template&id=18fa0fdd&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_template_id_18fa0fdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Trash_vue_vue_type_template_id_18fa0fdd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/account/Game.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/account/Game.vue ***!
@@ -58144,9 +59762,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Socmed_vue_vue_type_template_id_021fd0b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Socmed.vue?vue&type=template&id=021fd0b2& */ "./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&");
+/* harmony import */ var _Socmed_vue_vue_type_template_id_021fd0b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Socmed.vue?vue&type=template&id=021fd0b2&scoped=true& */ "./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&scoped=true&");
 /* harmony import */ var _Socmed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Socmed.vue?vue&type=script&lang=js& */ "./resources/js/components/account/Socmed.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css& */ "./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -58154,13 +59774,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Socmed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Socmed_vue_vue_type_template_id_021fd0b2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Socmed_vue_vue_type_template_id_021fd0b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Socmed_vue_vue_type_template_id_021fd0b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Socmed_vue_vue_type_template_id_021fd0b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "021fd0b2",
   null
   
 )
@@ -58186,19 +59806,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css& ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=style&index=0&id=021fd0b2&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_021fd0b2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&scoped=true& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_021fd0b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=template&id=021fd0b2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_021fd0b2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_021fd0b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=template&id=021fd0b2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/account/Socmed.vue?vue&type=template&id=021fd0b2&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_021fd0b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_021fd0b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_021fd0b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -58300,9 +59936,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Socmed_vue_vue_type_template_id_3f343734___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Socmed.vue?vue&type=template&id=3f343734& */ "./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&");
+/* harmony import */ var _Socmed_vue_vue_type_template_id_3f343734_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Socmed.vue?vue&type=template&id=3f343734&scoped=true& */ "./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&scoped=true&");
 /* harmony import */ var _Socmed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Socmed.vue?vue&type=script&lang=js& */ "./resources/js/components/manage/Socmed.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css& */ "./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -58310,13 +59948,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Socmed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Socmed_vue_vue_type_template_id_3f343734___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Socmed_vue_vue_type_template_id_3f343734___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Socmed_vue_vue_type_template_id_3f343734_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Socmed_vue_vue_type_template_id_3f343734_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "3f343734",
   null
   
 )
@@ -58342,19 +59980,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=style&index=0&id=3f343734&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_style_index_0_id_3f343734_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&scoped=true& ***!
+  \**********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_3f343734___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=template&id=3f343734& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_3f343734___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_3f343734_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Socmed.vue?vue&type=template&id=3f343734&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/manage/Socmed.vue?vue&type=template&id=3f343734&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_3f343734_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_3f343734___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Socmed_vue_vue_type_template_id_3f343734_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

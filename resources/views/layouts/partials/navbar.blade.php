@@ -28,8 +28,13 @@
                      </a>
                 </li>
                 <li class="nav-item">
-                     <a href="#" class="nav-link">
+                     <a href="#about" class="nav-link">
                          ABOUT
+                     </a>
+                </li>
+                <li class="nav-item">
+                     <a href="#contact" class="nav-link">
+                         CONTACT
                      </a>
                 </li>
                 @guest

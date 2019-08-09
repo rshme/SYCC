@@ -4,11 +4,9 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Game;
 use App\Account;
-use App\Socmed;
 
-class AccountController extends Controller
+class TrashController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $games = Game::with(['account'])->orderBy('name', 'asc')->get();
+        $account = Account::with(['game', 'socmed'])->onlyTrashed()->get();
 
-        return $games;
+        return $account;
     }
 
     /**
@@ -30,20 +28,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'password' => 'required'
-        ]);
-
-        $account = Account::create([
-            'user_id' => 1,
-            'game_id' => $request->game_id,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => $request->password,
-            'description' => $request->description
-        ]);
-
-        return $account;
+        //
     }
 
     /**
@@ -66,17 +51,13 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $account = Account::findOrFail($id);
+        $account = Account::withTrashed()->where('id', $id);
 
-        $account->update([
-            'game_id' => $request->game_id,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => $request->password,
-            'description' => $request->description,
-        ]);
+        $account->restore();
 
-        return $account;
+        return [
+            'msg' => 'restored'
+        ];
     }
 
     /**
@@ -87,9 +68,9 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        $account  = Account::findOrFail($id);
+        $account = Account::withTrashed()->where('id', $id);
 
-        $account->delete();
+        $account->forceDelete();
 
         return [
             'msg' => 'deleted'

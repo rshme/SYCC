@@ -37,10 +37,19 @@
         <div class="col-md-4 mb-3" v-for="account in game.account" :key="account.id">
           <div class="card">
             <div class="card-body">
-              <p v-if="account.username != null">Username: {{ account.username }}</p>
-              <p v-if="account.email != null">Email: {{ account.email }}</p>
+              <p v-if="account.username != null">
+                <b>Username:</b>
+                {{ account.username }}
+              </p>
+              <p v-if="account.email != null">
+                <b>Email:</b>
+                {{ account.email }}
+              </p>
               <p>Password: {{ account.password }}</p>
-              <p v-if="account.description != null">Deskripsi: {{ account.description }}</p>
+              <p v-if="account.description != null">
+                <b>Deskripsi:</b>
+                {{ account.description }}
+              </p>
             </div>
             <div class="card-footer">
               <button class="btn btn-danger" @click="deleteAccount(account.id)">
@@ -273,8 +282,8 @@ export default {
           text: "Yakin untuk menghapus akun ini?",
           type: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonColor: "#d33",
           confirmButtonText: "Ya, Hapus!",
           cancelButtonText: "Batal"
         })

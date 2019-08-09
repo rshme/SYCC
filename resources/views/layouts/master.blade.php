@@ -123,6 +123,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
 
+                        <li class="nav-item">
+                            <router-link to="/trash" class="nav-link">
+                                <i class="fas fa-trash"></i>
+                                <p>
+                                    Trash
+                                </p>
+                            </router-link>
+                        </li>
+
 
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">

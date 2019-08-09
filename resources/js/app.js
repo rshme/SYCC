@@ -69,6 +69,10 @@ const routes = [{
         path: '/manage/socmed',
         component: require('./components/manage/Socmed.vue').default
     },
+    {
+        path: '/trash',
+        component: require('./components/Trash.vue').default
+    },
 
 ]
 

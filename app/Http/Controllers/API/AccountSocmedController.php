@@ -4,11 +4,10 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Game;
-use App\Account;
 use App\Socmed;
+use App\Account;
 
-class AccountController extends Controller
+class AccountSocmedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $games = Game::with(['account'])->orderBy('name', 'asc')->get();
+        $socmed = Socmed::with(['account'])->orderBy('name', 'asc')->get();
 
-        return $games;
+        return $socmed;
     }
 
     /**
@@ -36,7 +35,7 @@ class AccountController extends Controller
 
         $account = Account::create([
             'user_id' => 1,
-            'game_id' => $request->game_id,
+            'socmed_id' => $request->socmed_id,
             'username' => $request->username,
             'email' => $request->email,
             'password' => $request->password,
@@ -69,7 +68,7 @@ class AccountController extends Controller
         $account = Account::findOrFail($id);
 
         $account->update([
-            'game_id' => $request->game_id,
+            'socmed_id' => $request->socmed_id,
             'username' => $request->username,
             'email' => $request->email,
             'password' => $request->password,

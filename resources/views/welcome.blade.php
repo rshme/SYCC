@@ -18,7 +18,7 @@
             background-position: center center;
             background-attachment: fixed;
             margin-top: -67px;
-            margin-bottom: 70px;
+            margin-bottom: 90px;
             color: #fff;
         }
         #particles-js{
@@ -152,10 +152,44 @@
     </section>
 
     @include('layouts.partials.footer')
-
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('vendor/particel-js/particles.js') }}"></script>
 <script>
     particlesJS.load('particles-js', '{{ asset("vendor/particel-js/particlesjs-config.json") }}');
+
+    $(window).scroll(function(){
+        const wScroll = $(this).scrollTop();
+
+        let navbar = $('.navbar');
+
+        if (wScroll >= 720) {
+            navbar.addClass('navbar-dark bg-dark fixed-top');
+            $('#intro').css({
+                'padding-top': '80px'
+            });
+        }
+        else{
+            navbar.removeClass('navbar-dark bg-dark fixed-top');
+                        $('#intro').css({
+                            'padding-top': '0'
+                        });
+        }
+    });
+    
+    $('.nav-link').click(function(e){
+        
+        if (this.hash != "") {
+            e.preventDefault();
+
+            const hash = this.hash;
+
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top - 20
+            }, 1200);
+            
+        }
+        
+    });
 </script>
 </body>
 </html>
